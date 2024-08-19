@@ -1,5 +1,5 @@
 # document build target (see corresponding .rst source file)
-SUM = EU_SUM.pdf
+SUM = twa_user_manual.pdf
 
 # just one pdf doc target for now
 DOCS = $(SUM)
@@ -9,7 +9,7 @@ DOT = dot
 
 # input files
 DOTSRC  := $(wildcard images/*.dot)
-SUMSRC = EU_SUM.rst
+SUMSRC = TW_SUM.rst
 
 #DOCTYPE = pdf
 # set this to the output image format to include in the doc target

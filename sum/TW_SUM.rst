@@ -8,10 +8,8 @@
        |
        | |ACME_logo|
 
-.. |ACME_logo| image:: images/acme.png
-   :width: 245
-   :height: 84
-   :scale: 250
+.. |ACME_logo| image:: images/timew.png
+   :scale: 512
 
 |
 |
@@ -25,10 +23,10 @@
 
    * - .. class:: title-name
 
-       Software User Manual for Advanced ACME Web Services Appliance
+       Software User Manual for
    * - .. class:: title-name
 
-       Engineering Evaluation Unit
+       Timew Status Indicator and Reporting Extensions
 
 |
 |
@@ -36,15 +34,15 @@
 
 .. class:: title-info
 
-Doc #ACME0081443A
+**Document number:** VCT81443A
 
 .. class:: title-info
 
-Version 0.1
+**Document revision:** |docrev|
 
 .. class:: title-info
 
-01/31/23
+**Document date:** |date|
 
 |
 |
@@ -81,13 +79,17 @@ Document revision history.
      - Description
    * - 0.1
      - SLA
-     - 2023-08-21
+     - 2023-08-17
      - Initial draft shell
    * - 0.2
      - SLA
-     - 2023-08-22
-     - Add system diagram
+     - 2024-08-18
+     - Update system description and replace graphics
 
+
+.. |date| date:: %m-%d-%Y %H:%M
+.. |docrev| replace:: 0.2
+.. |swversion| replace:: 0.1.0
 
 .. raw:: pdf
 
@@ -103,25 +105,33 @@ Document revision history.
 ~~~~~~~~~~~~~~~~~~~~
 
 This document is the Draft Software User Manual (see revision table) for the
-End-user Management Component of the Advanced ACME Web Services Appliance,
-Engineering Evaluation Unit.
+Timew-Addons package, including the ``timew-status-indicator`` GUI and the
+required ``timew`` report extensions.
 
 
 1.2 - System Overview
 ~~~~~~~~~~~~~~~~~~~~~
 
-The Advanced ACME Web Services Appliance is an on-premise virtual Web Services
-cluster with an advanced management interface.  This document provides both the
-User Manual and Troubleshooting Guide for the Management Console only.  The ACME
-Web Service high-level system components are shown in Figure 1 below:
+The Timew-Addons package includes a configurable status indicator app and
+some ``timew`` report extensions for customizing the report output of the
+``timew`` command.  The ``timew-status-indicator`` application is a small
+Gtk_ Appindicator_ GUI that takes advantage of desktop notifications and
+either (legacy) system tray or taskbar app support in XDG desktops. An
+appindicator GUI is typically small, essentially a menu connected to a
+variable set of icons (used to show status/state). Figure 1 below shows
+the default inactive state and menu:
 
-.. figure:: images/advanced_acme_web_service.png
+.. figure:: images/desktop_indicator.png
    :width: 90%
 
-   Figure 1. Advanced ACME Web Service Components
+   Figure 1. Gnome desktop indicator GUI
 
-The management console consumes monitoring data and summarizes/displays the
-analytics from Spark.
+In the above figure, the ``timew-status-indicator`` is actually running inside
+the Gnome Shell Extension appindicator-support_.
+
+.. _Gtk: https://pygobject.gnome.org/tutorials/gtk3.html
+.. _Appindicator: https://lazka.github.io/pgi-docs/AyatanaAppIndicator3-0.1/index.html
+.. _appindicator-support: https://extensions.gnome.org/extension/615/appindicator-support/
 
 
 1.3 - Document Overview
