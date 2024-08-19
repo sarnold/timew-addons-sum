@@ -1,0 +1,33 @@
+pageTemplates:
+    decoratedPage:
+        defaultFooter: |
+            .. class:: right
+
+            ###Page###
+
+
+            .. class:: draft
+
+            DRAFT
+
+
+        defaultHeader: &draftCentered |
+
+            .. class:: draft
+
+            DRAFT
+
+
+    mainPage: &draftTopAndBottom
+        defaultFooter: *draftCentered
+        defaultHeader: *draftCentered
+        showFooter: true
+        showHeader: true
+
+    coverPage: *draftTopAndBottom
+
+    emptyPage: *draftTopAndBottom
+
+
+styles:
+    draft: {alignment: center, parent: bodytext, fontName: fontSansBold}
