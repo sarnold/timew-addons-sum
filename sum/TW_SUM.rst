@@ -198,13 +198,13 @@ a. Logical components of the software, from the user’s point of view,
    and an overview of the purpose/operation of each component
 b. Performance characteristics that can be expected by the user, such as:
 
-  1) Types, volumes, rate of inputs accepted
-  2) Types, volume, accuracy, rate of outputs that the software can produce
-  3) Typical response time and factors that affect it
-  4) Typical processing time and factors that affect it
-  5) Limitations, such as number of events that can be tracked
-  6) Error rate that can be expected
-  7) Reliability that can be expected
+  1. Types, volumes, rate of inputs accepted
+  2. Types, volume, accuracy, rate of outputs that the software can produce
+  3. Typical response time and factors that affect it
+  4. Typical processing time and factors that affect it
+  5. Limitations, such as number of events that can be tracked
+  6. Error rate that can be expected
+  7. Reliability that can be expected
 
 c. Relationship of the functions performed by the software with interfacing
    systems, organizations, or positions
@@ -265,6 +265,12 @@ e. Procedures for turning power off if special sequencing of operations is neede
 This paragraph shall present an overview of the access and security
 features of the software that are visible to the user. The following
 items shall be included, as applicable:
+
+a. How and from whom to obtain a password
+b. How to add, delete, or change passwords under user control
+c. Security and privacy considerations pertaining to the storage and
+   marking of output reports and other media that the user will generate
+
 
 4.1.3 Installation and setup
 ----------------------------

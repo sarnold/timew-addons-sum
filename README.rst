@@ -1,6 +1,5 @@
-=====================================
- Software User Manual (SUM) Template
-=====================================
+Timew-Addons Software User Manual (SUM)
+=======================================
 
 |pre|
 
@@ -9,19 +8,19 @@
 **Documentation as Code**
 
 What is this thing?
-===================
+-------------------
 
-This is both a GitHub Template repository *and* a usable template for a
-DID-compliant Software User Manual in reStructuredText_. This repo contains
-the following items:
+This is a DID-compliant Software User Manual in reStructuredText_. The
+repo contains the following items:
 
+* A DID-compliant SUM (draft) using all the required DID sections
 * A Data Item Descripttion for a Software User Manual (SUM) (in ASCII
   text format)
-* A DID-compliant SUM outline using all the required DID sections (in
-  reStructuredText format)
-* A sample title-page logo and system diagram
+* A sample title-page, logo, and system diagram
 * Python source for the system diagram
 * A tox file and Makefiles (to build things from source)
+
+The sample bits will be replaced as the draft evolves.
 
 We use ``make`` and ``rst2pdf`` to build the full SUM document, and the diagrams_
 tool to generate system architecture and related software diagrams.
@@ -47,11 +46,7 @@ Contents after a fresh clone::
   │   ├── EU_SUM.rst                    # source code for the document/template
   │   ├── Makefile
   │   ├── images                        # graphics sources for document build
-  │   │   ├── acme.png
-  │   │   └── acme.svg
   │   └── styles                        # old/new format style sheets
-  │       ├── rst2pdf.style
-  │       └── sum.yaml
   ├── tox.ini                           # workflow configuration
   └── toxfile.py                        # workflow plugin file
 
@@ -62,7 +57,7 @@ Contents after a fresh clone::
 
 
 Software Stack and Tool Dependencies
-====================================
+------------------------------------
 
 Install the following with your system package manager to run the workflows:
 
@@ -80,7 +75,7 @@ using Python virtual environments inside the project directory and use the
 tools for "building" diagrams and document sources.
 
 Optional dependencies
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 The ``graph`` command shown below is *completely optional* and is therefore not
 required to generate/build graphics or documents. This ancillary command is only
@@ -97,8 +92,8 @@ required dependencies include Graphviz, along with the following:
 Note that package names for the above can differ between package managers, so
 search accordingly (remember you only need Graphviz for the document workflows).
 
-Usage
-=====
+Tool usage
+----------
 
 From inside the repository checkout, use  ``tox list`` to view the list of
 environment descriptions::
@@ -132,7 +127,7 @@ and use the resulting ``.svg`` file in your ``.rst`` source document.
 
 
 Contributing
-============
+------------
 
 Please read CONTRIBUTING_ for details on the code of conduct and some general
 guidance on submitting pull requests.
@@ -140,7 +135,7 @@ guidance on submitting pull requests.
 .. _CONTRIBUTING: https://github.com/VCTLabs/software_user_manual_template/blob/master/CONTRIBUTING.rst
 
 Pre-commit
-----------
+~~~~~~~~~~
 
 This repo is pre-commit_ enabled for python/rst source and file-type
 linting. The checks run automatically on commit and will fail the commit
@@ -192,7 +187,7 @@ To run all ``pre-commit`` checks manually, try::
 
 
 License
-=======
+-------
 
 This project is licensed under the MIT license - see the `LICENSE file`_ for
 details.
