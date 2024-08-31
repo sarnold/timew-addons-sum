@@ -6,9 +6,9 @@
    * - |
        |
        |
-       | |ACME_logo|
+       | |Addons_logo|
 
-.. |ACME_logo| image:: images/timew.png
+.. |Addons_logo| image:: images/timew.png
    :scale: 512
 
 |
@@ -27,6 +27,9 @@
    * - .. class:: title-name
 
        Timew Status Indicator and Reporting Extensions
+   * - .. class:: title-name
+
+       Latest SW release: |swversion|
 
 |
 |
@@ -42,7 +45,7 @@
 
 .. class:: title-info
 
-**Document date:** |date|
+**Document build date:** |date|
 
 |
 |
@@ -85,11 +88,15 @@ Document revision history.
      - SLA
      - 2024-08-18
      - Update system description and replace graphics
+   * - 0.3
+     - SLA
+     - 2024-08-30
+     - Update title page and sw version
 
 
 .. |date| date:: %m-%d-%Y %H:%M
 .. |docrev| replace:: 0.2
-.. |swversion| replace:: 0.1.0
+.. |swversion| replace:: 0.2.1
 
 .. raw:: pdf
 
@@ -401,8 +408,8 @@ section shall include an alphabetical listing of all acronyms, abbreviations,
 and their meanings as used in this document and a list of terms and
 definitions needed to understand this document.
 
-A.0 Appendixes
-==============
+Appendixes
+==========
 
 Appendixes may be used to provide information published separately for
 convenience in document maintenance (e.g., charts, classified data). As
