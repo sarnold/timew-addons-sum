@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   id="svg2265"
+   sodipodi:docname="stoplight.svg"
+   viewBox="0 0 18.967 54.4"
+   sodipodi:version="0.32"
+   version="1.0"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
+   inkscape:export-filename="stoplight.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="base"
+     bordercolor="#666666"
+     inkscape:pageshadow="2"
+     guidetolerance="10"
+     pagecolor="#ffffff"
+     gridtolerance="10000"
+     inkscape:window-height="991"
+     inkscape:zoom="7.481672"
+     objecttolerance="10"
+     borderopacity="1.0"
+     inkscape:current-layer="layer1"
+     inkscape:cx="9.5566873"
+     inkscape:cy="27.199802"
+     inkscape:window-y="23"
+     inkscape:window-x="26"
+     inkscape:window-width="1499"
+     inkscape:pageopacity="0.0"
+     inkscape:document-units="px"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:window-maximized="0" />
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     transform="translate(-381.95 -513.73)">
+    <g
+       id="g1724"
+       transform="translate(116.82 -7.3814)">
+      <rect
+         id="rect1720"
+         style="stroke:#000000;stroke-width:1.25;fill:#ffff04"
+         height="53.15"
+         width="17.717"
+         y="521.74"
+         x="265.75" />
+      <path
+         id="path1721"
+         sodipodi:rx="8.0849438"
+         sodipodi:ry="8.7404795"
+         style="stroke:#000000;stroke-width:1.25;fill:#d10000"
+         sodipodi:type="arc"
+         d="m282.75 564.64a8.0849 8.7405 0 1 1 -16.17 0 8.0849 8.7405 0 1 1 16.17 0z"
+         transform="matrix(.77688 0 0 .72733 61.228 119.63)"
+         sodipodi:cy="564.64343"
+         sodipodi:cx="274.66959" />
+      <path
+         id="path1722"
+         sodipodi:rx="8.0849438"
+         sodipodi:ry="8.7404795"
+         style="stroke:#000000;stroke-width:1.25;fill:#ffff00"
+         sodipodi:type="arc"
+         d="m282.75 564.64a8.0849 8.7405 0 1 1 -16.17 0 8.0849 8.7405 0 1 1 16.17 0z"
+         transform="matrix(.77688 0 0 .72733 61.228 137.33)"
+         sodipodi:cy="564.64343"
+         sodipodi:cx="274.66959" />
+      <path
+         id="path1723"
+         sodipodi:rx="8.0849438"
+         sodipodi:ry="8.7404795"
+         style="stroke:#000000;stroke-width:1.25;fill:#00bd00"
+         sodipodi:type="arc"
+         d="m282.75 564.64a8.0849 8.7405 0 1 1 -16.17 0 8.0849 8.7405 0 1 1 16.17 0z"
+         transform="matrix(.77688 0 0 .72733 61.228 155.03)"
+         sodipodi:cy="564.64343"
+         sodipodi:cx="274.66959" />
+    </g>
+  </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Stoplight</dc:title>
+        <dc:date>2007-09-15T04:39:12</dc:date>
+        <dc:description>A quick little stoplight symbol that prints nicely when very small.</dc:description>
+        <dc:source>https://openclipart.org/detail/5449/stoplight-by-ted</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>ted</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>maps</rdf:li>
+            <rdf:li>stoplight</rdf:li>
+            <rdf:li>symbol</rdf:li>
+            <rdf:li>traffic</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

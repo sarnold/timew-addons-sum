@@ -92,10 +92,14 @@ Document revision history.
      - SLA
      - 2024-08-30
      - Update title page and sw version
+   * - 0.4
+     - SLA
+     - 2024-08-31
+     - Fleash out sections 2 and 3
 
 
 .. |date| date:: %m-%d-%Y %H:%M
-.. |docrev| replace:: 0.2
+.. |docrev| replace:: 0.4
 .. |swversion| replace:: 0.2.1
 
 .. raw:: pdf
@@ -123,15 +127,15 @@ The Timew-Addons package includes a configurable status indicator app and
 some ``timew`` report extensions for customizing the report output of the
 ``timew`` command.  The ``timew-status-indicator`` application is a small
 Gtk_ Appindicator_ GUI that takes advantage of desktop notifications and
-either (legacy) system tray or taskbar app support in XDG desktops. An
+either (legacy) system tray or taskbar applet support in XDG desktops. An
 appindicator GUI is typically small, essentially a menu connected to a
 variable set of icons (used to show status/state). Figure 1 below shows
-the default inactive state and menu:
+the menu and default inactive state icon:
 
 .. figure:: images/desktop_indicator.png
    :width: 90%
 
-   Figure 1. Gnome desktop indicator GUI
+   Figure 1. Gnome desktop appindicator GUI
 
 In the above figure, the ``timew-status-indicator`` is actually running inside
 the Gnome Shell Extension appindicator-support_.
@@ -144,101 +148,140 @@ the Gnome Shell Extension appindicator-support_.
 1.3 - Document Overview
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall summarize the purpose and contents of this manual
-and shall describe any security or privacy considerations associated
-with its use.
+The purpose of this SUM document is to provide a hands-on software user
+the basic information required to operate the ``timew-status-indicator``
+user interface (GUI) and reporting tools (timew extensions) in the
+context of time tracking using the timewarrior_ tool. The content and
+format generally follow the SUM Data Item Description (DI-IPSC-81443)
+from `this template repo`_.
+
+.. _timewarrior: https://timewarrior.net/docs/
+.. _this template repo: https://github.com/VCTLabs/software_user_manual_template
+
 
 2.0 Referenced documents
 ========================
 
-This section shall list the number, title, revision, and date of all
-documents referenced in this manual. This section shall also identify
-the source for all documents not available through normal Government
-stocking activities.
+User component documentation:
+
+* timew-addons: https://sarnold.github.io/timew-addons/
+* timew-report: https://github.com/lauft/timew-report/
+* timewarrior: https://timewarrior.net/docs/
+* gnome extensions: https://extensions.gnome.org/about/
+* XDG desktop: https://www.freedesktop.org/wiki/
+
 
 3.0 Software summary
 ====================
 
-This section shall be divided into the following paragraphs.
+This software is primarily a Python_ project and follows current Python
+packaging standards such as PEP517_ and still relies on legacy features
+to package and install non-python files (eg, icons and .desktop files).
+
+.. _Python: https://docs.python.org/3/contents.html
+.. _PEP517: https://peps.python.org/pep-0517/
+
+The primary user-facing file types are:
+
+:desktop file: launcher for ``timew-status-indicator``
+:extensions: ``onelineday`` and ``totals``
+:icons: ``icons/*.svg,*.png`` files
+
 
 3.1 Software application
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall provide a brief description of the intended uses of the
-software. Capabilities, operating improvements, and benefits expected from
-its use shall be described.
+.. image:: images/stoplight.png
+  :scale: 96
+  :align: left
+
+Timewarrior is Free and Open Source Software that tracks time from the
+command line. The reporting of tracked time intervals is also based on
+terminal I/O so the ``timew`` command has an extension interface to load
+user scripts to process ``timew`` intervals and emit custom report formats
+to ``stdout``.
+
+The report extensions enable custom output formats for both human and
+machine consumption, while the status indicator GUI enables monitoring
+and control of timewarrior tracking intervals with configurable "work day"
+and "seat" timers. Alerts and menu feedback are provided via icon changes
+and/or desktop notification bubbles using a "stoplight" metaphor on top
+of the built-in Python log levels and Gnome symbolic indicator icons:
+INFO, WARNING, ERROR.
+
 
 3.2 Software inventory
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall identify all software files, including databases
-and data files, that must be installed for the software to operate. The
-identification shall include security and privacy considerations for
-each file and identification of the software necessary to continue or
-resume operation in case of an emergency.
+Listing installed files using native package managers.
+
+Runtime requires user post-install of extension modules.
+
 
 3.3 Software environment
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall identify the hardware, software, manual operations,
-and other resources needed for a user to install and run the software.
-Included, as applicable, shall be identification of:
+The base environment is essentially the standard Linux/Unix host requirements for
+running an XDG-compliant desktop environment based on Gtk_ (and related dependencies).
+There are no specific SW requirements beyond the Linux user with ``sudo`` access
+to install software. The primary supported Linux distributions are Gentoo
+and Ubuntu 20.04 or 22.04 LTS.
 
-a. Computer equipment that must be present, including amount of memory
-   needed, amount of auxiliary storage needed, and peripheral equipment
-   such as printers and other input/output devices
-b. Communications equipment that must be present
-c. Other software that must be present, such as operating systems,
-   databases, data files, utilities, and other supporting systems
-d. Forms, procedures, or other manual operations that must be present
-e. Other facilities, equipment, or resources that must be present
+The minimum required hardware to run a compliant desktop is sufficient for the GUI,
+but the report extensions should run in any modern console environment where
+timewarrior can be installed.
+
+See Appendix A.2 Development Environments regarding alternate Linux distributions
+that have been tested.
+
+
+3.3.1 Software dependencies
+---------------------------
+
+Dependencies can be found in specific packaging artifacts for each environment:
+
+* Base packages for Python_ - munch, pycairo, PyGObject, timew-report
+* Base packages for Gentoo_ and Ubuntu_ - the above Python packages, plus
+  non-python libraries for libayatana-appindicator, libnotify, and libgtk+v3
+* Additional packages - some environments may also need hicolor-icon-theme
+  or gnome-shell-extension-appindicator
+
+
+.. _Ubuntu: https://ubuntu.com/
+.. _Debian: https://www.debian.org/
+.. _Gentoo: https://www.gentoo.org/
 
 
 3.4 Software organization and overview of operation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall provide a brief description of the organization and
-operation of the software from the user’s point of view. The description
-shall include, as applicable:
+The logical user-facing components of the software are shown below:
 
-a. Logical components of the software, from the user’s point of view,
-   and an overview of the purpose/operation of each component
-b. Performance characteristics that can be expected by the user, such as:
+* Timew Status Tool - selected from the Applications View or the Utils menu
+  in an XDG-compliant desktop
+* XDG-user configuration - created in XDG config directory
 
-  1. Types, volumes, rate of inputs accepted
-  2. Types, volume, accuracy, rate of outputs that the software can produce
-  3. Typical response time and factors that affect it
-  4. Typical processing time and factors that affect it
-  5. Limitations, such as number of events that can be tracked
-  6. Error rate that can be expected
-  7. Reliability that can be expected
+  + ``$HOME/.config/timew_status_indicator/config.yaml``
 
-c. Relationship of the functions performed by the software with interfacing
-   systems, organizations, or positions
-d. Supervisory controls that can be implemented (such as passwords) to
-   manage the software
+* report extensions - "staged" by package install, requires install by
+  user into timewarrior extensions directory
 
-3.5 Contingencies and alternate states and modes of operation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  + ``$HOME/.timewarrior/extensions``
 
-This paragraph shall explain the differences in what the user will be
-able to do with the software at times of emergency and in various states
-and modes of operation, if applicable.
-
-3.6 Security and privacy
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-This paragraph shall contain an overview of the security and privacy
-considerations associated with the software. A warning shall be included
-regarding making unauthorized copies of software or documents, if
-applicable.
-
-3.7 Assistance and problem reporting
+3.5 Assistance and problem reporting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall identify points of contact and procedures to be
-followed to obtain assistance and report problems encountered in using
-the software.
+Please use the lovely GitHub_ features to submit Pull Requests or report
+problems. For software problems, use the Addons_ issue tracker; for documentation
+problems/corrections, use the Addons-SUM_ issue tracker. If unsure, feel
+free to open a Discussion_ topic instead.
+
+
+.. _GitHub: https://github.com/features
+.. _Addons: https://github.com/sarnold/timew-addons/issues
+.. _Addons-SUM: https://github.com/sarnold/timew-addons-sum/issues
+.. _Discussion: https://github.com/sarnold/timew-addons/discussions
+
 
 4.0 Access to the software
 ==========================
