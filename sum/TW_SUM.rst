@@ -67,13 +67,15 @@
 
    PageBreak
 
-Revisions
-=========
+
+.. role:: bigtext
+
+:bigtext:`Revisions`
 
 Document revision history.
 
 .. list-table::
-   :widths: 9 19 11 33
+   :widths: 8 8 10 45
    :header-rows: 1
 
    * - Revision
@@ -96,24 +98,32 @@ Document revision history.
      - SLA
      - 2024-08-31
      - Flesh out sections 2 and 3
+   * - 0.5
+     - SLA
+     - 2024-09-01
+     - Switch to secnum directive, make section 3 complete-ish
 
 
 .. |date| date:: %m-%d-%Y %H:%M
-.. |docrev| replace:: 0.4
+.. |docrev| replace:: 0.5
 .. |swversion| replace:: 0.2.1
 
 .. raw:: pdf
 
    PageBreak
 
+.. section-numbering::
+   :depth: 4
+
+.. include:: <isonum.txt>
 
 
-1.0 - Scope
-===========
+Scope
+=====
 
 
-1.1 - Identification
-~~~~~~~~~~~~~~~~~~~~
+Identification
+~~~~~~~~~~~~~~
 
 This document is the Software User Manual (see revision table) for the
 Timew-Addons package, including the ``timew-status-indicator`` GUI and the
@@ -128,8 +138,8 @@ components:
 .. _freedesktop: https://www.freedesktop.org/wiki/
 .. _report extensions: https://github.com/lauft/timew-report/
 
-1.2 - System Overview
-~~~~~~~~~~~~~~~~~~~~~
+System Overview
+~~~~~~~~~~~~~~~
 
 The Timew-Addons package includes a configurable status indicator app and
 some ``timew`` report extensions for customizing the report output of the
@@ -153,8 +163,8 @@ the Gnome Shell Extension appindicator-support_.
 .. _appindicator-support: https://extensions.gnome.org/extension/615/appindicator-support/
 
 
-1.3 - Document Overview
-~~~~~~~~~~~~~~~~~~~~~~~
+Document Overview
+~~~~~~~~~~~~~~~~~
 
 The purpose of this SUM document is to provide a hands-on software user
 the basic information required to operate the ``timew-status-indicator``
@@ -167,8 +177,8 @@ from `this template repository`_.
 .. _this template repository: https://github.com/VCTLabs/software_user_manual_template
 
 
-2.0 Referenced documents
-========================
+Referenced documents
+====================
 
 User component documentation:
 
@@ -179,8 +189,8 @@ User component documentation:
 * XDG desktop: https://www.freedesktop.org/wiki/
 
 
-3.0 Software summary
-====================
+Software summary
+================
 
 This software is primarily a Python_ project and follows current Python
 packaging standards such as PEP517_ and still relies on legacy features
@@ -196,18 +206,18 @@ The primary user-facing file types are:
 :icons: ``icons/*.svg,*.png`` files
 
 
-3.1 Software application
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. image:: images/stoplight.png
-  :scale: 96
-  :align: left
+Software application
+~~~~~~~~~~~~~~~~~~~~
 
 Timewarrior is Free and Open Source Software that tracks time from the
 command line. The reporting of tracked time intervals is also based on
 terminal I/O so the ``timew`` command has an extension interface to load
 user scripts to process ``timew`` intervals and emit custom report formats
 to ``stdout``.
+
+.. image:: images/stoplight.png
+  :scale: 100
+  :align: left
 
 The report extensions enable custom output formats for both human and
 machine consumption, while the status indicator GUI enables monitoring
@@ -218,20 +228,202 @@ of the built-in Python log levels and Gnome symbolic indicator icons:
 INFO, WARNING, ERROR.
 
 
-3.2 Software inventory
-~~~~~~~~~~~~~~~~~~~~~~
+Software inventory
+~~~~~~~~~~~~~~~~~~
 
-Listing installed files using native package managers.
+Regardless of packaging tools, the installed files can be listed using the
+"native" packaging tools as shown in the section below.
 
-Runtime requires user post-install of extension modules.
+Quick start install
+-------------------
+
+The appindicator GUI prefers OS package manager over virtual environment
+install due to the icon/desktop file integration with an XDG-compliant
+desktop, eg, Gnome or XFCE.  While the extension scripts should work
+anywhere ``timew`` can be installed, running the appindicator GUI requires
+a real XDG desktop environment, meaning Linux or some other POSIX environment
+with Gtk+ and all the other desktop bits.
+
+That said, the GUI script should still run from a local Python virtual
+environment, albeit with a fallback set of icons.
+
+* if on Gentoo, add `this portage overlay`_ and install ``timew-addons``
+* if on recent Ubuntu LTS, add `this PPA`_ and install ``timew-addons``
+
+Install with package manager
+++++++++++++++++++++++++++++
+
+OS packages are deployed via multiple methods, including GH release pages
+and package overlays for Gentoo_ and Ubuntu_.
+
+Installing using system package manager is currently only supported on
+Gentoo_ and requires `this portage overlay`_. Use one of the overlay
+install methods shown in the readme_ file and sync the overlay; following
+the overlay sync, install the package and dependencies::
+
+  $ sudo emerge timew-addons -v --ask
+
+When available, use the following `Ubuntu PPA`_ to install on at least
+Focal and Jammy.  Make sure you have the ``add-apt-repository`` command
+installed and then add the PPA:
+
+::
+
+  $ sudo apt-get install software-properties-common
+  $ sudo add-apt-repository -y -s ppa:nerdboy/embedded
+  $ sudo apt-get install timew-addons
+
+See `Adding this PPA to your system`_ for more info.
+
+.. _Adding this PPA to your system:
+.. _this PPA:
+.. _Ubuntu PPA: https://launchpad.net/~nerdboy/+archive/ubuntu/embedded
+.. _Gentoo: https://www.gentoo.org/
+.. _readme:
+.. _this portage overlay: https://github.com/VCTLabs/embedded-overlay/
 
 
-3.3 Software environment
-~~~~~~~~~~~~~~~~~~~~~~~~
+Package listings
+----------------
+
+Using Gentoo's ``app-portage/portage-utils``::
+
+   user@gentoo timew-addons $ qlist timew-addons
+   /usr/share/timew-addons/extensions/totals.py
+   /usr/share/timew-addons/extensions/onelineday.py
+   /usr/share/timew-addons/extensions/csv_rpt.py
+   /usr/share/doc/timew-addons-0.2.1/README.rst.bz2
+   /usr/share/applications/timew-status-indicator.desktop
+   /usr/share/icons/hicolor/scalable/status/timew_info.svg
+   /usr/share/icons/hicolor/scalable/status/timew_warning.svg
+   /usr/share/icons/hicolor/scalable/status/timew_inactive.svg
+   /usr/share/icons/hicolor/scalable/status/timew_error.svg
+   /usr/share/icons/hicolor/scalable/apps/timew.svg
+   /usr/share/icons/hicolor/48x48/apps/timew.png
+   /usr/bin/timew-status-indicator
+   /usr/lib/python3.11/site-packages/timew_status/__pycache__/__init__.cpython-311.opt-1.pyc
+   /usr/lib/python3.11/site-packages/timew_status/__pycache__/utils.cpython-311.opt-1.pyc
+   /usr/lib/python3.11/site-packages/timew_status/__pycache__/__init__.cpython-311.opt-2.pyc
+   /usr/lib/python3.11/site-packages/timew_status/__pycache__/utils.cpython-311.opt-2.pyc
+   /usr/lib/python3.11/site-packages/timew_status/__pycache__/__init__.cpython-311.pyc
+   /usr/lib/python3.11/site-packages/timew_status/__pycache__/utils.cpython-311.pyc
+   /usr/lib/python3.11/site-packages/timew_status/utils.py
+   /usr/lib/python3.11/site-packages/timew_status/__init__.py
+   /usr/lib/python3.11/site-packages/timew_addons-0.2.1.dist-info/top_level.txt
+   /usr/lib/python3.11/site-packages/timew_addons-0.2.1.dist-info/WHEEL
+   /usr/lib/python3.11/site-packages/timew_addons-0.2.1.dist-info/METADATA
+   /usr/lib/python-exec/python3.11/timew-status-indicator
+
+Using ``dpkg`` on Ubuntu *focal*::
+
+   ubuntu@arm:~$ dpkg -L timew-addons
+   /.
+   /usr
+   /usr/bin
+   /usr/bin/timew-status-indicator
+   /usr/lib
+   /usr/lib/python3
+   /usr/lib/python3/dist-packages
+   /usr/lib/python3/dist-packages/timew_addons-0.1.1.egg-info
+   /usr/lib/python3/dist-packages/timew_addons-0.1.1.egg-info/PKG-INFO
+   /usr/lib/python3/dist-packages/timew_addons-0.1.1.egg-info/dependency_links.txt
+   /usr/lib/python3/dist-packages/timew_addons-0.1.1.egg-info/requires.txt
+   /usr/lib/python3/dist-packages/timew_addons-0.1.1.egg-info/top_level.txt
+   /usr/lib/python3/dist-packages/timew_status
+   /usr/lib/python3/dist-packages/timew_status/__init__.py
+   /usr/lib/python3/dist-packages/timew_status/utils.py
+   /usr/lib/timew-addons
+   /usr/lib/timew-addons/extensions
+   /usr/lib/timew-addons/extensions/csv_rpt.py
+   /usr/lib/timew-addons/extensions/onelineday.py
+   /usr/lib/timew-addons/extensions/totals.py
+   /usr/share
+   /usr/share/applications
+   /usr/share/applications/timew-status-indicator.desktop
+   /usr/share/doc
+   /usr/share/doc/timew-addons
+   /usr/share/doc/timew-addons/changelog.Debian.gz
+   /usr/share/doc/timew-addons/copyright
+   /usr/share/icons
+   /usr/share/icons/hicolor
+   /usr/share/icons/hicolor/48x48
+   /usr/share/icons/hicolor/48x48/apps
+   /usr/share/icons/hicolor/48x48/apps/timew.png
+   /usr/share/icons/hicolor/scalable
+   /usr/share/icons/hicolor/scalable/apps
+   /usr/share/icons/hicolor/scalable/apps/timew.svg
+   /usr/share/icons/hicolor/scalable/status
+   /usr/share/icons/hicolor/scalable/status/timew_error.svg
+   /usr/share/icons/hicolor/scalable/status/timew_inactive.svg
+   /usr/share/icons/hicolor/scalable/status/timew_info.svg
+   /usr/share/icons/hicolor/scalable/status/timew_warning.svg
+   /usr/share/python3
+   /usr/share/python3/runtime.d
+   /usr/share/python3/runtime.d/timew-addons.rtupdate
+
+
+While not recommended for normal use, it does work using pip_ in a
+virtual_environment_ **if** all the native (non-python) deps are
+installed::
+
+   (venv) user@host timew-addons $ python -m pip show -f timew-addons
+   Name: timew-addons
+   Version: 0.2.2.dev4+g5e4f985
+   Summary: A collection of timewarrior extensions and experiments
+   Home-page: https://github.com/sarnold/timew-addons
+   Author: Stephen L Arnold
+   Author-email: nerdboy@gentoo.org
+   License: GPLv3+
+   Location: /home/nerdboy/src/timew-addons/.tox/py/lib/python3.11/site-packages
+   Requires: munch, pycairo, PyGObject, timew-report
+   Required-by:
+   Files:
+     ../../../bin/timew-status-indicator
+     ../../../share/applications/timew-status-indicator.desktop
+     ../../../share/icons/hicolor/48x48/apps/timew.png
+     ../../../share/icons/hicolor/scalable/apps/timew.svg
+     ../../../share/icons/hicolor/scalable/status/timew_error.svg
+     ../../../share/icons/hicolor/scalable/status/timew_inactive.svg
+     ../../../share/icons/hicolor/scalable/status/timew_info.svg
+     ../../../share/icons/hicolor/scalable/status/timew_warning.svg
+     ../../../share/timew-addons/extensions/__pycache__/csv_rpt.cpython-311.pyc
+     ../../../share/timew-addons/extensions/__pycache__/onelineday.cpython-311.pyc
+     ../../../share/timew-addons/extensions/__pycache__/totals.cpython-311.pyc
+     ../../../share/timew-addons/extensions/csv_rpt.py
+     ../../../share/timew-addons/extensions/onelineday.py
+     ../../../share/timew-addons/extensions/totals.py
+     timew_addons-0.2.2.dev4+g5e4f985.dist-info/INSTALLER
+     timew_addons-0.2.2.dev4+g5e4f985.dist-info/METADATA
+     timew_addons-0.2.2.dev4+g5e4f985.dist-info/RECORD
+     timew_addons-0.2.2.dev4+g5e4f985.dist-info/REQUESTED
+     timew_addons-0.2.2.dev4+g5e4f985.dist-info/WHEEL
+     timew_addons-0.2.2.dev4+g5e4f985.dist-info/direct_url.json
+     timew_addons-0.2.2.dev4+g5e4f985.dist-info/top_level.txt
+     timew_status/__init__.py
+     timew_status/__pycache__/__init__.cpython-311.pyc
+     timew_status/__pycache__/utils.cpython-311.pyc
+     timew_status/utils.py
+
+User-installed/modifyable files
+-------------------------------
+
+Runtime requires thedesktop user to perform post-install of extension
+modules. What this means is, *you* (the user) must manully installed
+the staged extension files into the ``$HOME`` path shown in section
+`Software organization and overview of operation`_. This can be done
+either from GUI menu or by copying the files manually. Use the config
+file to change the path in ``extensions_dir`` *only if necessary*.
+
+
+.. _pip: https://pip.pypa.io/en/stable/
+.. _virtual_environment: https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
+
+Software environment
+~~~~~~~~~~~~~~~~~~~~
 
 The base environment is essentially the standard Linux/Unix host requirements for
 running an XDG-compliant desktop environment based on Gtk_ (and related dependencies).
-There are no specific SW requirements beyond the Linux user with ``sudo`` access
+There are no specific SW requirements beyond the normal user with ``sudo`` access
 to install software. The primary supported Linux distributions are Gentoo
 and Ubuntu 20.04 or 22.04 LTS.
 
@@ -239,12 +431,12 @@ The minimum required hardware to run a compliant desktop is sufficient for the G
 but the report extensions should run in any modern console environment where
 timewarrior can be installed.
 
-See Appendix A.2 Development Environments regarding alternate Linux distributions
+See Section 6.x Development Environments regarding alternate Linux distributions
 that have been tested.
 
 
-3.3.1 Software dependencies
----------------------------
+Software dependencies
+---------------------
 
 Dependencies can be found in specific packaging artifacts for each environment:
 
@@ -260,24 +452,24 @@ Dependencies can be found in specific packaging artifacts for each environment:
 .. _Gentoo: https://www.gentoo.org/
 
 
-3.4 Software organization and overview of operation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Software organization and overview of operation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The logical user-facing components of the software are shown below:
 
-* Timew Status Indicator - selected from the Applications View or the Utils menu
+* **Timew Status Indicator** - selected from the Applications View or the Utils menu
   in an XDG-compliant desktop
-* XDG-user configuration - created in XDG config directory
+* **XDG-user configuration** - created in XDG config directory::
 
-  + ``$HOME/.config/timew_status_indicator/config.yaml``
+    $HOME/.config/timew_status_indicator/config.yaml
 
-* report extensions - "staged" by package install, requires install by
-  user into timewarrior extensions directory
+* **Report extensions** - "staged" by package install, requires install by
+  user into timewarrior extensions directory::
 
-  + ``$HOME/.timewarrior/extensions``
+    $HOME/.timewarrior/extensions
 
-3.5 Assistance and problem reporting
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Assistance and problem reporting
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Please use the lovely GitHub_ features to submit Pull Requests or report
 problems. For software problems, use the Addons_ issue tracker; for documentation
@@ -291,8 +483,8 @@ free to open a Discussion_ topic instead.
 .. _Discussion: https://github.com/sarnold/timew-addons/discussions
 
 
-4.0 Access to the software
-==========================
+Access to the software
+======================
 
 This section shall contain step-by-step procedures oriented to the first
 time/occasional user. Enough detail shall be presented so that the user
@@ -300,13 +492,13 @@ can reliably access the software before learning the details of its
 functional capabilities. Safety precautions, marked by WARNING or
 CAUTION, shall be included where applicable.
 
-4.1 First-time user of the software
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+First-time user of the software
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This paragraph shall be divided into the following subparagraphs.
 
-4.1.1 Equipment familiarization
--------------------------------
+Equipment familiarization
+-------------------------
 
 This paragraph shall describe the following as appropriate:
 
@@ -317,8 +509,8 @@ c. Appearance of the cursor, how to identify an active cursor if more than
 d. Keyboard layout and role of different types of keys and pointing devices
 e. Procedures for turning power off if special sequencing of operations is needed
 
-4.1.2 Access control
---------------------
+Access control
+--------------
 
 This paragraph shall present an overview of the access and security
 features of the software that are visible to the user. The following
@@ -330,8 +522,8 @@ c. Security and privacy considerations pertaining to the storage and
    marking of output reports and other media that the user will generate
 
 
-4.1.3 Installation and setup
-----------------------------
+Installation and setup
+----------------------
 
 This paragraph shall describe any procedures that the user must perform
 to be identified or authorized to access or install software on the
@@ -339,22 +531,22 @@ equipment, to perform the installation, to configure the software, to
 delete or overwrite former files or data, and to enter parameters for
 software operation.
 
-4.2 Initiating a session
-~~~~~~~~~~~~~~~~~~~~~~~~
+Initiating a session
+~~~~~~~~~~~~~~~~~~~~
 
 This paragraph shall provide step-by-step procedures for beginning work,
 including any options available. A checklist for problem determination
 shall be included in case difficulties are encountered.
 
-4.3 Stopping and suspending work
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Stopping and suspending work
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This paragraph shall describe how the user can cease or interrupt use of
 the software and how to determine whether normal termination or
 cessation has occurred.
 
-5.0 Processing reference guide
-==============================
+Processing reference guide
+==========================
 
 This section shall provide the user with procedures for using the
 software. If procedures are complicated or extensive, additional
@@ -373,28 +565,28 @@ function-by-function, menu-by-menu, transaction-by-transaction, or other
 basis. Safety precautions, marked by WARNING or CAUTION, shall be
 included where applicable.
 
-5.1 Capabilities
-~~~~~~~~~~~~~~~~
+Capabilities
+~~~~~~~~~~~~
 
 This paragraph shall briefly describe the interrelationships of the
 transactions, menus, functions, or other processes in order to provide
 an overview of the use of the software.
 
-5.2 Conventions
-~~~~~~~~~~~~~~~
+Conventions
+~~~~~~~~~~~
 
 This paragraph shall describe any conventions used by the software, such
 as the use of colors in displays, the use of audible alarms, the use of
 abbreviated vocabulary, and the use of rules for assigning names or codes.
 
-5.3 Processing procedures
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Processing procedures
+~~~~~~~~~~~~~~~~~~~~~
 
 This paragraph shall explain the organization of subsequent paragraphs,
 e.g., by function, by menu, by screen. Any necessary order in which
 procedures must be accomplished shall be described.
 
-5.3.x (Aspect of software use)
+Aspect of software use (5.3.x)
 ------------------------------
 
 The title of this paragraph shall identify the function, menu,
@@ -410,30 +602,30 @@ presentation shall be used, i.e., the descriptions of menus shall be
 consistent, the descriptions of transactions shall be consistent among
 themselves.
 
-5.4 Related processing
-~~~~~~~~~~~~~~~~~~~~~~
+Related processing
+~~~~~~~~~~~~~~~~~~
 
 This paragraph shall identify and describe any related batch, offline,
 or background processing performed by the software that is not invoked
 directly by the user and is not described in paragraph 5.3. Any user
 responsibilities to support this processing shall be specified.
 
-5.5 Data backup
-~~~~~~~~~~~~~~~
+Data backup
+~~~~~~~~~~~
 
 This paragraph shall describe procedures for creating and retaining
 backup data that can be used to replace primary copies of data in event
 of errors, defects, malfunctions, or accidents.
 
-5.6 Recovery from errors, malfunctions, and emergencies
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Recovery from errors, malfunctions, and emergencies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This paragraph shall present detailed procedures for restart or recovery
 from errors or malfunctions occurring during processing and for ensuring
 continuity of operations in the event of emergencies.
 
-5.7 Messages
-~~~~~~~~~~~~
+Messages
+~~~~~~~~
 
 This paragraph shall list, or refer to an appendix that lists, all error
 messages, diagnostic messages, and information messages that can occur
@@ -441,8 +633,8 @@ while accomplishing any of the user’s functions. The meaning of each
 message and the action that should be taken after each such message
 shall be identified and described.
 
-5.8 Quick-reference guide
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Quick-reference guide
+~~~~~~~~~~~~~~~~~~~~~
 
 If appropriate to the software, this paragraph shall provide or
 reference a quick-reference card or page for using the software. This
@@ -450,8 +642,8 @@ quick-reference guide shall summarize, as applicable, frequently-used
 function keys, control sequences, formats, commands, or other aspects of
 software use.
 
-6.0 Notes
-=========
+Notes
+=====
 
 This section shall contain any general information that aids in understanding
 this document (e.g., background information, glossary, rationale). This
@@ -459,12 +651,32 @@ section shall include an alphabetical listing of all acronyms, abbreviations,
 and their meanings as used in this document and a list of terms and
 definitions needed to understand this document.
 
-Appendixes
+Acronyms and abbreviations
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following may be used in this document to describe specific technologies
+or engineering processes.
+
+:COTS: Commercial-Off-The-Shelf
+:CSCI: Computer Software Configuration Item
+:FPGA: Field-programmable gate array
+:FW: Firmware
+:GUI: Graphical User INterface
+:HW: Hardware
+:ID: Project-unique identifier
+:PR: Pull Request (agile code review/quality check workflow step)
+:RAM: Reliability, Availability, and Maintainability (aka RMA)
+:RC: Release Candidate (SW and FW)
+:STD: Software Test Description
+:STR: Software Test Report
+:SUM: Software User Manual
+:SUT: System Under Test
+:SVD: Software Version Description
+:SW: Software
+
+
+Appendices
 ==========
 
-Appendixes may be used to provide information published separately for
-convenience in document maintenance (e.g., charts, classified data). As
-applicable, each appendix shall be referenced in the main body of the
-document where the data would normally have been provided. Appendixes
-may be bound as separate documents for ease in handling. Appendixes
-shall be lettered alphabetically (A, B, etc.).
+Appendices are strictly optional; if used they should be lettered A, B,
+C, and so on.

@@ -16,6 +16,28 @@ styles:
     fontSize: 125%
     parent: heading
 
+  field-list:
+    colWidths:
+    - 3.4cm
+    - null
+
+  bigtext:
+    fontSize: 125%
+    parent: bodytext
+  bluetext:
+    parent: bodytext
+    textColor: blue
+  redtext:
+    parent: bodytext
+    fontName: fontSerifBold
+    textColor: red
+  hdrtext:
+    fontSize: 150%
+    parent: heading
+  tbltext:
+    parent: bodytext
+    fontName: fontSerifBold
+
   item-list:
     colWidths:
     - 30pt
