@@ -10,11 +10,11 @@ Timew-Addons Software User Manual (SUM)
 What is this thing?
 -------------------
 
-This is a DID-compliant Software User Manual in reStructuredText_. The
+This is a DID-compliant `Software User Manual`_ in reStructuredText_. The
 repo contains the following items:
 
-* A DID-compliant SUM (draft) using all the required DID sections
-* A Data Item Descripttion for a Software User Manual (SUM) (in ASCII
+* A DID-compliant SUM for timew-addons_ using all the required DID sections
+* A Data Item Description for a Software User Manual (SUM) (in ASCII
   text format)
 * A sample title-page, logo, and system diagram
 * Python source for the system diagram
@@ -54,6 +54,8 @@ Contents after a fresh clone::
 .. _reStructuredText: https://docutils.sourceforge.io/rst.html
 .. _diagrams: https://github.com/VCTLabs/diagrams
 .. _affinity: https://github.com/VCTLabs/affinity
+.. _Software User Manual: https://github.com/sarnold/timew-addons
+.. _timew-addons: `Software User Manual`_
 
 
 Software Stack and Tool Dependencies

@@ -404,7 +404,7 @@ installed::
      timew_status/__pycache__/utils.cpython-311.pyc
      timew_status/utils.py
 
-User-installed/modifyable files
+User-installed/modifiable files
 -------------------------------
 
 Runtime requires thedesktop user to perform post-install of extension
