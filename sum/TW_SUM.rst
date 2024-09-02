@@ -95,7 +95,7 @@ Document revision history.
    * - 0.4
      - SLA
      - 2024-08-31
-     - Fleash out sections 2 and 3
+     - Flesh out sections 2 and 3
 
 
 .. |date| date:: %m-%d-%Y %H:%M
@@ -115,10 +115,18 @@ Document revision history.
 1.1 - Identification
 ~~~~~~~~~~~~~~~~~~~~
 
-This document is the Draft Software User Manual (see revision table) for the
+This document is the Software User Manual (see revision table) for the
 Timew-Addons package, including the ``timew-status-indicator`` GUI and the
-required ``timew`` report extensions.
+required ``timew`` report extensions. Herein we describe the following
+components:
 
+:appindicator: Gtk-based freedesktop_ taskbar/sys-tray GUI
+:config.yaml: XDG freedesktop-compliant `user configuration`_
+:extensions: timewarrior `report extensions`_
+
+.. _user configuration: https://github.com/sarnold/timew-addons/blob/4659e21a0d75cd6a050488b8096b9a4b54844393/src/timew_status/utils.py#L12
+.. _freedesktop: https://www.freedesktop.org/wiki/
+.. _report extensions: https://github.com/lauft/timew-report/
 
 1.2 - System Overview
 ~~~~~~~~~~~~~~~~~~~~~
@@ -133,7 +141,7 @@ variable set of icons (used to show status/state). Figure 1 below shows
 the menu and default inactive state icon:
 
 .. figure:: images/desktop_indicator.png
-   :width: 90%
+   :width: 95%
 
    Figure 1. Gnome desktop appindicator GUI
 
@@ -153,10 +161,10 @@ the basic information required to operate the ``timew-status-indicator``
 user interface (GUI) and reporting tools (timew extensions) in the
 context of time tracking using the timewarrior_ tool. The content and
 format generally follow the SUM Data Item Description (DI-IPSC-81443)
-from `this template repo`_.
+from `this template repository`_.
 
 .. _timewarrior: https://timewarrior.net/docs/
-.. _this template repo: https://github.com/VCTLabs/software_user_manual_template
+.. _this template repository: https://github.com/VCTLabs/software_user_manual_template
 
 
 2.0 Referenced documents
@@ -257,7 +265,7 @@ Dependencies can be found in specific packaging artifacts for each environment:
 
 The logical user-facing components of the software are shown below:
 
-* Timew Status Tool - selected from the Applications View or the Utils menu
+* Timew Status Indicator - selected from the Applications View or the Utils menu
   in an XDG-compliant desktop
 * XDG-user configuration - created in XDG config directory
 
