@@ -102,11 +102,15 @@ Document revision history.
      - SLA
      - 2024-09-01
      - Switch to secnum directive, make section 3 complete-ish
+   * - 0.6
+     - SLA
+     - 2024-10-13
+     - Update sections 3 and 4, add more screenshots
 
 
 .. |date| date:: %m-%d-%Y %H:%M
-.. |docrev| replace:: 0.5
-.. |swversion| replace:: 0.2.1
+.. |docrev| replace:: 0.6
+.. |swversion| replace:: 0.3.0
 
 .. raw:: pdf
 
@@ -126,8 +130,8 @@ Identification
 ~~~~~~~~~~~~~~
 
 This document is the Software User Manual (see revision table) for the
-Timew-Addons package, including the ``timew-status-indicator`` GUI and the
-required ``timew`` report extensions. Herein we describe the following
+timew-addons package, including the ``timew-status-indicator`` GUI and the
+required ``timew`` report extensions. This manual describes the following
 components:
 
 :appindicator: Gtk-based freedesktop_ taskbar/sys-tray GUI
@@ -193,7 +197,7 @@ Software summary
 ================
 
 This software is primarily a Python_ project and follows current Python
-packaging standards such as PEP517_ and still relies on legacy features
+packaging standards such as PEP517_ but still relies on legacy features
 to package and install non-python files (eg, icons and .desktop files).
 
 .. _Python: https://docs.python.org/3/contents.html
@@ -221,7 +225,7 @@ to ``stdout``.
 
 The report extensions enable custom output formats for both human and
 machine consumption, while the status indicator GUI enables monitoring
-and control of timewarrior tracking intervals with configurable "work day"
+and control of Timewarrior tracking intervals with configurable "work day"
 and "seat" timers. Alerts and menu feedback are provided via icon changes
 and/or desktop notification bubbles using a "stoplight" metaphor on top
 of the built-in Python log levels and Gnome symbolic indicator icons:
@@ -233,55 +237,6 @@ Software inventory
 
 Regardless of packaging tools, the installed files can be listed using the
 "native" packaging tools as shown in the section below.
-
-Quick start install
--------------------
-
-The appindicator GUI prefers OS package manager over virtual environment
-install due to the icon/desktop file integration with an XDG-compliant
-desktop, eg, Gnome or XFCE.  While the extension scripts should work
-anywhere ``timew`` can be installed, running the appindicator GUI requires
-a real XDG desktop environment, meaning Linux or some other POSIX environment
-with Gtk+ and all the other desktop bits.
-
-That said, the GUI script should still run from a local Python virtual
-environment, albeit with a fallback set of icons.
-
-* if on Gentoo, add `this portage overlay`_ and install ``timew-addons``
-* if on recent Ubuntu LTS, add `this PPA`_ and install ``timew-addons``
-
-Install with package manager
-++++++++++++++++++++++++++++
-
-OS packages are deployed via multiple methods, including GH release pages
-and package overlays for Gentoo_ and Ubuntu_.
-
-Installing using system package manager is currently only supported on
-Gentoo_ and requires `this portage overlay`_. Use one of the overlay
-install methods shown in the readme_ file and sync the overlay; following
-the overlay sync, install the package and dependencies::
-
-  $ sudo emerge timew-addons -v --ask
-
-When available, use the following `Ubuntu PPA`_ to install on at least
-Focal and Jammy.  Make sure you have the ``add-apt-repository`` command
-installed and then add the PPA:
-
-::
-
-  $ sudo apt-get install software-properties-common
-  $ sudo add-apt-repository -y -s ppa:nerdboy/embedded
-  $ sudo apt-get install timew-addons
-
-See `Adding this PPA to your system`_ for more info.
-
-.. _Adding this PPA to your system:
-.. _this PPA:
-.. _Ubuntu PPA: https://launchpad.net/~nerdboy/+archive/ubuntu/embedded
-.. _Gentoo: https://www.gentoo.org/
-.. _readme:
-.. _this portage overlay: https://github.com/VCTLabs/embedded-overlay/
-
 
 Package listings
 ----------------
@@ -407,12 +362,12 @@ installed::
 User-installed/modifiable files
 -------------------------------
 
-Runtime requires thedesktop user to perform post-install of extension
-modules. What this means is, *you* (the user) must manully installed
-the staged extension files into the ``$HOME`` path shown in section
-`Software organization and overview of operation`_. This can be done
-either from GUI menu or by copying the files manually. Use the config
-file to change the path in ``extensions_dir`` *only if necessary*.
+Runtime requires the desktop user to perform post-install of extension modules.
+What this means is, *you* (the user) must manually installed the staged
+extension files into the ``$HOME`` path shown in section `Software organization
+and overview of operation`_. This can be done either from GUI menu or by copying
+the files manually. Use the configuration file to change the path in
+``extensions_dir`` *only if necessary*.
 
 
 .. _pip: https://pip.pypa.io/en/stable/
@@ -472,78 +427,165 @@ Assistance and problem reporting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Please use the lovely GitHub_ features to submit Pull Requests or report
-problems. For software problems, use the Addons_ issue tracker; for documentation
-problems/corrections, use the Addons-SUM_ issue tracker. If unsure, feel
-free to open a Discussion_ topic instead.
+problems. For software problems, use the timew-addons_ issue tracker; for
+documentation problems/corrections, use the timew-addons-sum_ issue tracker.
+If unsure, feel free to open a Discussion_ topic instead.
 
 
 .. _GitHub: https://github.com/features
-.. _Addons: https://github.com/sarnold/timew-addons/issues
-.. _Addons-SUM: https://github.com/sarnold/timew-addons-sum/issues
+.. _timew-addons: https://github.com/sarnold/timew-addons/issues
+.. _timew-addons-sum: https://github.com/sarnold/timew-addons-sum/issues
 .. _Discussion: https://github.com/sarnold/timew-addons/discussions
 
 
-Access to the software
+Obtaining the software
 ======================
 
-This section shall contain step-by-step procedures oriented to the first
-time/occasional user. Enough detail shall be presented so that the user
-can reliably access the software before learning the details of its
-functional capabilities. Safety precautions, marked by WARNING or
-CAUTION, shall be included where applicable.
+The ideal option for obtaining the software is via your system's package
+manager, eg, ``apt`` or ``portage`` rather than installing directly from
+the source code repository. That said, using the (github) source or one
+of the release artifacts is the fallback if system packages are not
+available.
 
 First-time user of the software
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall be divided into the following subparagraphs.
+Install using system packages *if available for your environment* otherwise
+choose an appropriate install method for ``pip``.  Supported environments
+include:
+
+* Gentoo (overlay)
+* Ubuntu 20/22 (PPA)
+* Debian (with self-hosted packages)
+* Pip --user install
+* Python/Tox virtualenv
 
 Equipment familiarization
 -------------------------
 
-This paragraph shall describe the following as appropriate:
-
-a. Procedures for turning on power and making adjustments
-b. Dimensions and capabilities of the visual display screen
-c. Appearance of the cursor, how to identify an active cursor if more than
-   one cursor can appear, how to position a cursor, and how to use a cursor
-d. Keyboard layout and role of different types of keys and pointing devices
-e. Procedures for turning power off if special sequencing of operations is needed
+This manual assumes the user is familiar with their own Linux desktop
+features, as well as basic ``timew`` command-line usage. Additional
+documentation links are provided inline, as well as in the
+`Referenced documents`_ section.
 
 Access control
 --------------
 
-This paragraph shall present an overview of the access and security
-features of the software that are visible to the user. The following
-items shall be included, as applicable:
+Since all of the described components, including the ``timew`` command
+itself, run with normal user-level permissions, there are no special
+access control or authentication procedures. Once the user has successfully
+opened their desktop environment, they are free to access all features,
+including creating or modifying report extensions.
 
-a. How and from whom to obtain a password
-b. How to add, delete, or change passwords under user control
-c. Security and privacy considerations pertaining to the storage and
-   marking of output reports and other media that the user will generate
+That said, admin privileges (ie, ``sudo`` access) are required to install
+system-level packages; note this includes the manual ``dpkg`` method
+highlighted below.
 
+Quick start install
+-------------------
 
-Installation and setup
-----------------------
+The appindicator GUI prefers OS package manager over virtual environment
+install due to the icon/desktop file integration with an XDG-compliant
+desktop, eg, Gnome or XFCE.  While the extension scripts should work
+anywhere ``timew`` can be installed, running the appindicator GUI requires
+a real XDG desktop environment, meaning Linux or some other POSIX environment
+with Gtk+ and all the other desktop bits.
 
-This paragraph shall describe any procedures that the user must perform
-to be identified or authorized to access or install software on the
-equipment, to perform the installation, to configure the software, to
-delete or overwrite former files or data, and to enter parameters for
-software operation.
+That said, the GUI script should still run from a local Python virtual
+environment, albeit with a fallback set of icons.
+
+* if on Gentoo, add `this portage overlay`_ and install ``timew-addons``
+* if on recent Ubuntu LTS, add `this PPA`_ and install ``timew-addons``
+* if on a recent Debian release, download one of the ``.deb`` packages
+  from the latest release page on Github
+
+Install with package manager
+++++++++++++++++++++++++++++
+
+OS packages are deployed via multiple methods, including GH release pages
+and package overlays for Gentoo_ and Ubuntu_.
+
+Installing using system package manager is currently only supported on
+Gentoo_ and requires `this portage overlay`_. Use one of the overlay
+install methods shown in the readme_ file and sync the overlay; following
+the overlay sync, install the package and dependencies::
+
+  $ sudo emerge timew-addons -v --ask
+
+When available, use the following `Ubuntu PPA`_ to install on at least
+Focal and Jammy.  Make sure you have the ``add-apt-repository`` command
+installed and then add the PPA:
+
+::
+
+  $ sudo apt-get install software-properties-common
+  $ sudo add-apt-repository -y -s ppa:nerdboy/embedded
+  $ sudo apt-get install timew-addons
+
+See `Adding this PPA to your system`_ for more info.
+
+If the Github release page has a ``.deb`` package artifact with your Debian
+release name, then download the one you need and install it manually, eg,
+download both:
+
+* `timew-addons deb`_
+* `timew-report deb`_
+
+and install them using ``dpkg -i``, something like::
+
+  $ sudo dpkg -i path/to/file1.deb path/to/file2.deb
+
+.. _timew-addons deb: https://github.com/sarnold/timew-addons/releases/download/0.3.0/timew-addons_0.3.0-1+g7e2790d-bookworm.zip
+.. _timew-report deb: https://github.com/sarnold/timew-report/releases/download/v1.4.0/timew-report_1.4.0-10+gc66c7b7-bookworm_amd64.deb
+.. _Adding this PPA to your system:
+.. _this PPA:
+.. _Ubuntu PPA: https://launchpad.net/~nerdboy/+archive/ubuntu/embedded
+.. _Gentoo: https://www.gentoo.org/
+.. _readme:
+.. _this portage overlay: https://github.com/VCTLabs/embedded-overlay/
+
 
 Initiating a session
 ~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall provide step-by-step procedures for beginning work,
-including any options available. A checklist for problem determination
-shall be included in case difficulties are encountered.
+For those less familiar with the Gnome Desktop environment, please see the
+`Visual overview of GNOME`_.
+
+.. _Visual overview of GNOME: https://help.gnome.org/users/gnome-help/3.38/shell-introduction.html.en
+
+When properly installed, the ``timew-status-indicator`` component will
+appear somewhere in the Gnome Activities Overview. If the app icon is
+not immediately visible, type the first few characters into the search
+field near the top, as shown in Figure 2 below:
+
+.. figure:: images/search.png
+   :width: 75%
+
+   Figure 2. Gnome activities search
+
+Alternatively, in most other XDG desktops, check for it on the Applications
+or Utilities menu.
+
 
 Stopping and suspending work
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall describe how the user can cease or interrupt use of
-the software and how to determine whether normal termination or
-cessation has occurred.
+To stop an open timew tracking interval, ie, terminate a running ``timew``
+instance, select the "Stop" item from the menu:
+
+.. figure:: images/stop.png
+   :width: 84%
+
+   Figure 3. Stop ``timew``
+
+To stop the ``timew-status-indicator`` GUI, select the "Quit" item from
+the menu:
+
+.. figure:: images/quit.png
+   :width: 84%
+
+   Figure 4. Quit ``timew-status-indicator``
+
 
 Processing reference guide
 ==========================
@@ -645,7 +687,7 @@ software use.
 Notes
 =====
 
-This section shall contain any general information that aids in understanding
+This section contains any general information that aids in understanding
 this document (e.g., background information, glossary, rationale). This
 section shall include an alphabetical listing of all acronyms, abbreviations,
 and their meanings as used in this document and a list of terms and
@@ -661,9 +703,10 @@ or engineering processes.
 :CSCI: Computer Software Configuration Item
 :FPGA: Field-programmable gate array
 :FW: Firmware
-:GUI: Graphical User INterface
+:GUI: Graphical User Interface
 :HW: Hardware
 :ID: Project-unique identifier
+:LTS: Long Term Support
 :PR: Pull Request (agile code review/quality check workflow step)
 :RAM: Reliability, Availability, and Maintainability (aka RMA)
 :RC: Release Candidate (SW and FW)
