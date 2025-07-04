@@ -68,7 +68,7 @@ Install the following with your system package manager to run the workflows:
 * Graphviz_ - any recent version should work
 * make and bash - any recent versions should be fine
 
-.. _Python: https://docs.python.org/3.9/index.html
+.. _Python: https://docs.python.org/3.12/index.html
 .. _Tox: https://tox.wiki/en/latest/user_guide.html
 .. _Graphviz: https://www.graphviz.org/
 

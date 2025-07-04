@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+
+    strategy:
+      fail-fast: false
+      matrix:
+        name: ['py39', 'py313']
+        python-version: ['3.9', '3.13']
+        os: ['ubuntu-22.04']
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Environment
+      run: |
+        bash -c set
+
+    - name: Install Ubuntu build deps
+      run: |
+        sudo apt-get -qq update
+        sudo apt-get install -yqq graphviz
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install Tox
+      run: |
+        python -m pip install --upgrade pip
+        pip install tox
+
+    - name: Build PDF
+      run: |
+        tox -e build

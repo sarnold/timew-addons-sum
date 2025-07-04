@@ -8,7 +8,7 @@ on:
       - master
 
 jobs:
-  pre-commit:
+  pre_commit:
     name: pre-commit
     runs-on: ubuntu-22.04
     steps:
