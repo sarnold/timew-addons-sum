@@ -106,11 +106,15 @@ Document revision history.
      - SLA
      - 2024-10-13
      - Update sections 3 and 4, add more screenshots
+   * - 0.7
+     - SLA
+     - 2025-07-04
+     - Update versions for trimmed draft release
 
 
 .. |date| date:: %m-%d-%Y %H:%M
-.. |docrev| replace:: 0.6
-.. |swversion| replace:: 0.3.0
+.. |docrev| replace:: 0.7
+.. |swversion| replace:: 0.3.3
 
 .. raw:: pdf
 
@@ -223,13 +227,13 @@ to ``stdout``.
   :scale: 100
   :align: left
 
-The report extensions enable custom output formats for both human and
-machine consumption, while the status indicator GUI enables monitoring
-and control of Timewarrior tracking intervals with configurable "work day"
-and "seat" timers. Alerts and menu feedback are provided via icon changes
-and/or desktop notification bubbles using a "stoplight" metaphor on top
-of the built-in Python log levels and Gnome symbolic indicator icons:
-INFO, WARNING, ERROR.
+The timew-addons report extensions enable custom output formats for both
+human and machine consumption, while the status indicator GUI enables
+monitoring and control of Timewarrior tracking intervals with
+configurable "work day" and "seat" timers. Alerts and menu feedback are
+provided via icon changes and/or desktop notification bubbles using a
+"stoplight" metaphor on top of the built-in Python log levels and Gnome
+symbolic indicator icons: INFO, WARNING, ERROR.
 
 
 Software inventory
@@ -455,7 +459,7 @@ choose an appropriate install method for ``pip``.  Supported environments
 include:
 
 * Gentoo (overlay)
-* Ubuntu 20/22 (PPA)
+* Ubuntu 20/22/24 (PPA)
 * Debian (with self-hosted packages)
 * Pip --user install
 * Python/Tox virtualenv
@@ -502,13 +506,12 @@ environment, albeit with a fallback set of icons.
 Install with package manager
 ++++++++++++++++++++++++++++
 
-OS packages are deployed via multiple methods, including GH release pages
-and package overlays for Gentoo_ and Ubuntu_.
-
-Installing using system package manager is currently only supported on
-Gentoo_ and requires `this portage overlay`_. Use one of the overlay
-install methods shown in the readme_ file and sync the overlay; following
-the overlay sync, install the package and dependencies::
+OS packages are deployed via multiple methods, including GH release
+pages and package overlays for Gentoo_ and Ubuntu_. Installing using
+system package manager is currently only supported on Gentoo_ and
+requires `this portage overlay`_. Use one of the overlay install
+methods shown in the readme_ file and sync the overlay; following the
+overlay sync, install the package and dependencies::
 
   $ sudo emerge timew-addons -v --ask
 
@@ -528,15 +531,13 @@ If the Github release page has a ``.deb`` package artifact with your Debian
 release name, then download the one you need and install it manually, eg,
 download both:
 
-* `timew-addons deb`_
-* `timew-report deb`_
+* https://github.com/sarnold/timew-addons/releases
+* https://github.com/sarnold/timew-report/releases
 
 and install them using ``dpkg -i``, something like::
 
   $ sudo dpkg -i path/to/file1.deb path/to/file2.deb
 
-.. _timew-addons deb: https://github.com/sarnold/timew-addons/releases/download/0.3.0/timew-addons_0.3.0-1+g7e2790d-bookworm.zip
-.. _timew-report deb: https://github.com/sarnold/timew-report/releases/download/v1.4.0/timew-report_1.4.0-10+gc66c7b7-bookworm_amd64.deb
 .. _Adding this PPA to your system:
 .. _this PPA:
 .. _Ubuntu PPA: https://launchpad.net/~nerdboy/+archive/ubuntu/embedded
@@ -559,7 +560,7 @@ not immediately visible, type the first few characters into the search
 field near the top, as shown in Figure 2 below:
 
 .. figure:: images/search.png
-   :width: 75%
+   :width: 65%
 
    Figure 2. Gnome activities search
 
@@ -587,102 +588,284 @@ the menu:
    Figure 4. Quit ``timew-status-indicator``
 
 
-Processing reference guide
-==========================
+User reference guide
+====================
 
-This section shall provide the user with procedures for using the
-software. If procedures are complicated or extensive, additional
-Sections 6, 7, etc, may be added in the same paragraph structure as this
-section and with titles meaningful to the sections selected. The
-organization of the document will depend on the characteristics of the
-software being documented. For example, one approach is to base the
-sections on the organizations in which users work, their assigned
-positions, their work sites, or the tasks they must perform. For other
-software, it may be more appropriate to have Section 5 be a guide to
-menus, Section 6 be a guide to the command language used, and Section 7
-be a guide to functions. Detailed procedures are intended to be
-presented in subparagraphs of paragraph 5.3. Depending on the design of
-the software, the subparagraphs might be organized on a
-function-by-function, menu-by-menu, transaction-by-transaction, or other
-basis. Safety precautions, marked by WARNING or CAUTION, shall be
-included where applicable.
+* user description of timew-addons components
+* capabilities and conventions
+* procedures and usage of components
+
 
 Capabilities
 ~~~~~~~~~~~~
 
-This paragraph shall briefly describe the interrelationships of the
-transactions, menus, functions, or other processes in order to provide
-an overview of the use of the software.
+* component capabilities
+
+  + timew reporting extensions
+  + timew control and status UI
+
+
 
 Conventions
 ~~~~~~~~~~~
 
-This paragraph shall describe any conventions used by the software, such
-as the use of colors in displays, the use of audible alarms, the use of
-abbreviated vocabulary, and the use of rules for assigning names or codes.
+* timew extensions interface
+* XDG desktop user configuration path
+* optional job tag separator in timew tag string
+* traditional "stoplight" colors for indicator UI
 
-Processing procedures
-~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall explain the organization of subsequent paragraphs,
-e.g., by function, by menu, by screen. Any necessary order in which
-procedures must be accomplished shall be described.
+Usage and procedures
+~~~~~~~~~~~~~~~~~~~~
 
-Aspect of software use (5.3.x)
-------------------------------
+Usage details for both the indicator UI and the report extensions are
+given by component in the following sections
 
-The title of this paragraph shall identify the function, menu,
-transaction, or other process being described. This paragraph shall
-describe and give options and examples, as applicable, of menus,
-graphical icons, data entry forms, user inputs, inputs from other
-software or hardware that may affect the software’s interface with the
-user, outputs, diagnostic or error messages or alarms, and help
-facilities that can provide on-line descriptive or tutorial information.
-The format for presenting this information can be adapted to the
-particular characteristics of the software, but a consistent style of
-presentation shall be used, i.e., the descriptions of menus shall be
-consistent, the descriptions of transactions shall be consistent among
-themselves.
 
-Related processing
-~~~~~~~~~~~~~~~~~~
+Extension reporting examples
+----------------------------
 
-This paragraph shall identify and describe any related batch, offline,
-or background processing performed by the software that is not invoked
-directly by the user and is not described in paragraph 5.3. Any user
-responsibilities to support this processing shall be specified.
+The following extension examples can be found in the ``extensions`` folder
+in the top-level of the sdist or repository:
+
+* ``onelineday.py`` - a real-world custom report example
+* ``totals.py`` - a totals-by-tag report based on the `upstream example`_
+* ``csv_rpt.py`` - a simple CSV report also based on the `upstream example`_
+
+They must be manually installed to the location shown below.
+
+.. _upstream example: https://github.com/lauft/timew-report/blob/master/README.md
+
+Extension usage
++++++++++++++++
+
+In general, report extension scripts are installed under ``$HOME`` in the
+timewarrior extensions folder, which on Linux equates to::
+
+  $ ls ~/.timewarrior/extensions
+  csv_rpt.py  onelineday.py totals.py
+
+To use the report extensions, first install timewarrior `on your platform`_
+and run the command from a console prompt, then find the extensions directory,
+something like::
+
+  $ sudo emerge app-misc/timew --ask
+  $ timew -h
+  $ find $HOME -maxdepth 1 -name .timewarrior -type d
+  /home/user/.timewarrior
+  $ ls /home/user/.timewarrior
+  data  extensions  timewarrior.cfg
+
+Finally, copy the desired extension(s) into the extensions folder::
+
+  $ cp /usr/lib/timew-addons/extensions/onelineday.py ~/.timewarrior/extensions/
+
+When using OS packages, extensions should be installed to the above path.
+
+Run the extension by substituting the extension name for the usual "summary"
+command, eg, instead of ``timew summary june``, use something like::
+
+  $ timew onelineday june
+
+Extension names can also be aliases of the full extension filename, so
+using::
+
+  $ timew one today
+
+should also work.
+
+.. _on your platform: https://timewarrior.net/docs/install/
+
+
+Environment
++++++++++++
+
+The report extensions used by the `Appindicator GUI`_ have 2 output formats:
+
+* the default verbose mode is "human" report output
+* the optional terse mode is consumed and displayed by the GUI
+
+The output mode and job-tag separator are exported as shell environment
+variables by the GUI script on startup, which affects *only the internal*
+runtime environment of the GUI. However, this means the variables are set
+in the shell environment of the terminal launched by the menu option, so
+running ``timew`` commands from this terminal instance will use the "terse"
+output mode unless the environment variable is unset, eg, after launching
+a terminal from the GUI menu, run the following in that terminal window::
+
+  $ timew one yesterday
+  xyz-test;08:39:36
+  vctlabs;00:36:20
+  total;09:15:56
+  $ unset INDICATOR_FMT
+  $ timew one yesterday
+  Duration has 1 days and 2 total job tags:
+  ['xyz-test', 'vctlabs']
+
+  -- xyz-test
+  2024-08-23 3:58:47 xyz-test,continue test case document structure
+  2024-08-23 2:38:37 xyz-test,test doc development
+  2024-08-23 0:18:55 xyz-test,test doc development discussion
+  2024-08-23 1:43:17 xyz-test,test status mtg
+
+  Total for xyz-test: 08:39:36 hrs
+
+  -- vctlabs
+  2024-08-23 0:36:20 vctlabs,project status/planning mtg
+
+  Total for vctlabs: 00:36:20 hrs
+
+  Final total for all jobs in duration: 09:15:56 hrs
+
+Appindicator GUI
+----------------
+
+timew-status-indicator is a control and status application for timew that
+runs from the system tray on XDG-compliant Linux desktops.
+
+And by "application" we mean a simple appindicator-based GUI which is
+basically just an icon with a menu. It loads in the indicator area or the
+system tray (whatever is available in your desktop environment). The icon's
+menu allows you to start and stop time tracking, as well as get status
+and edit the timew tag string. The tray icon appearance will
+update to show the current state of timew vs configurable limits.
+
+GUI usage
++++++++++
+
+Select Timew Status Indicator from the Applications View or the Utils
+menu in your desktop of choice, eg, Gnome, Unity, Xfce, etc. You can
+also add it to your session startup or run it from an X terminal to get
+some debug output::
+
+  $ timew-status-indicator
+
+.. role:: bigtext
+
+:bigtext:`What exactly are we tracking?`
+
+Simply put, we want to track work hours and seat time in the context of
+the daily hours tracked via the ``timew`` command. The configuration file
+contains 2 parameters each for setting desired limits, the base max value,
+and an optional "snooze" period:
+
+:day_max: target number of daily work hours
+:day_snooze: additional snooze period appended to daily max
+:seat_max: max number of minutes to stay seated
+:seat_snooze: additional snooze period appended to seat max
+
+Values for the above are given in hours and minutes formatted
+as "time" strings, eg, the following sets an 8-hour max:
+
+.. code-block:: yaml
+
+    day_max: "08:00"
+
+The seat timer can be disabled by setting both *max* and *snooze* to
+zeros, ie, set both values like so:
+
+.. code-block:: yaml
+
+    seat_max: "00:00"
+    seat_snooze: "00:00"
+
+
+:bigtext:`Status indicator GUI`
+
+It would not be an Appindicator_ without icons, so we use icons as one way
+to show current state. This has nothing to do with application state; in
+this case we only care about the state of our *timew tracking interval*;
+note this includes the seat timer warnings when there is an active timew
+tracking interval. The states and corresponding icons are shown below:
+
+:INACTIVE: |inactive| The state when there is no active tracking interval.
+:INFO: |info| The default active state when tracking interval is open.
+:WARNING: |warn| The state when either timer has reached the snooze period.
+:ERROR: |err| The state when either snooze period has expired.
+:APP: |app| While not a state, we use this to retrieve the app icon.
+
+.. |app| image:: images/timew.png
+   :align: top
+   :width: 42 px
+.. |inactive| image:: images/timew_inactive.png
+   :align: top
+   :width: 42 px
+.. |info| image:: images/timew_info.png
+   :align: top
+   :width: 42 px
+.. |warn| image:: images/timew_warning.png
+   :align: top
+   :width: 42 px
+.. |err| image:: images/timew_error.png
+   :align: top
+   :width: 42 px
+
+
+Extension processing
+~~~~~~~~~~~~~~~~~~~~
+
+The extension scripts require a basic console environment with both
+timewarrior and the timew-report packages installed (usually via system
+package manager). Running the indicator GUI script requires both
+Python_ and a modern Gtk+ windowing environment with Gtk3_ and
+PyGObject_.
+
+.. important:: The GUI script requires one of the following extensions
+               to parse the current time total from the ``timew`` output.
+               Both scripts have been modified to check an environment
+               variable and output a summary CSV format.
+
+Install either ``onelineday.py`` or ``totals.py`` as shown above, depending
+on preferred tag format:
+
+onelineday
+  Use for job-tag prefix format with sub-totals. See the docstring in
+  ``onelineday.py`` for more details.
+
+totals
+  Use for free-form tag format *without* a job-tag prefix.
+
+Set the extension script in the config file with the following key, using
+either "onelineday" or "totals" for the value. Similarly set the job-tag
+separator if needed:
+
+.. code-block:: yaml
+
+  extension_script: onelineday
+  jtag_separator: ";"
+
+
+.. _Python: https://docs.python.org/3/contents.html
+.. _Gtk3: https://pygobject.gnome.org/tutorials/gtk3.html
+.. _PyGObject: https://pygobject.gnome.org/index.html
+
 
 Data backup
 ~~~~~~~~~~~
 
-This paragraph shall describe procedures for creating and retaining
-backup data that can be used to replace primary copies of data in event
-of errors, defects, malfunctions, or accidents.
+* XDG desktop data backup
+* Timewarrior data backup
 
-Recovery from errors, malfunctions, and emergencies
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This paragraph shall present detailed procedures for restart or recovery
-from errors or malfunctions occurring during processing and for ensuring
-continuity of operations in the event of emergencies.
+Recovery from errors or malfunctions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* check current timer settings in ``config.yaml``
+* check that required extensions are installed
+* use ``timew retag`` command to "fix" incorrect tags
+
 
 Messages
 ~~~~~~~~
 
-This paragraph shall list, or refer to an appendix that lists, all error
-messages, diagnostic messages, and information messages that can occur
-while accomplishing any of the user’s functions. The meaning of each
-message and the action that should be taken after each such message
-shall be identified and described.
+Desktop notification types for timew-status-indicator:
 
-Quick-reference guide
-~~~~~~~~~~~~~~~~~~~~~
+:Timew status: Typical status messages include interval tracking start/stop
+               and tag changes, as well as INFO level messages.
+:Timew state: State change messages are emitted when seat or day timers
+              expire; snooze timers trigger the WARNING state, while max
+              timers trigger the ERROR state
 
-If appropriate to the software, this paragraph shall provide or
-reference a quick-reference card or page for using the software. This
-quick-reference guide shall summarize, as applicable, frequently-used
-function keys, control sequences, formats, commands, or other aspects of
-software use.
 
 Notes
 =====
